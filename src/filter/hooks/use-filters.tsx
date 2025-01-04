@@ -2,7 +2,7 @@ import {useSearchParams} from "next/navigation";
 
 import {Filters} from "../types";
 
-function setFilter(key: string, value: string) {
+function setFilter(key: keyof Filters, value: string) {
   // Create new search params
   const params = new URLSearchParams(window.location.search);
 
@@ -28,6 +28,7 @@ export function useFilters(): [Filters, typeof setFilter] {
     trusted: searchParams.get("trusted") === "true",
     sort: (searchParams.get("sort") as Filters["sort"]) || "position",
     direction: (searchParams.get("direction") as Filters["direction"]) || "asc",
+    trustTo: Number(searchParams.get("trustTo")) || 3,
   };
 
   return [filters, setFilter];

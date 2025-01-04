@@ -25,21 +25,24 @@ function HomePageClient({salaries, filters}: {salaries: MeanSalary[]; filters: F
   return (
     <section className="grid h-full gap-4">
       {salaries.length > 0 ? (
-        <div className="w-full overflow-auto">
-          <Table className="border">
+        <div className="w-full overflow-auto rounded-md border">
+          <Table>
             <TableHeader>
-              <TableRow>
+              <TableRow className="*:border-r *:text-center hover:bg-transparent">
                 <TableHead
                   className={cn(
                     {underline: filters.sort === "position"},
-                    "min-w-48 cursor-pointer",
+                    "min-w-48 cursor-pointer hover:bg-muted/25",
                   )}
                   onClick={() => handleSort("position")}
                 >
                   Posición
                 </TableHead>
                 <TableHead
-                  className={cn({underline: filters.sort === "currency"}, "cursor-pointer")}
+                  className={cn(
+                    {underline: filters.sort === "currency"},
+                    "cursor-pointer hover:bg-muted/25",
+                  )}
                   onClick={() => handleSort("currency")}
                 >
                   Moneda
@@ -47,14 +50,17 @@ function HomePageClient({salaries, filters}: {salaries: MeanSalary[]; filters: F
                 <TableHead
                   className={cn(
                     {underline: filters.sort === "seniority"},
-                    "min-w-48 cursor-pointer",
+                    "min-w-48 cursor-pointer hover:bg-muted/25",
                   )}
                   onClick={() => handleSort("seniority")}
                 >
                   Seniority
                 </TableHead>
                 <TableHead
-                  className={cn({underline: filters.sort === "value"}, "cursor-pointer")}
+                  className={cn(
+                    {underline: filters.sort === "value"},
+                    "cursor-pointer hover:bg-muted/25",
+                  )}
                   onClick={() => handleSort("value")}
                 >
                   Salario
@@ -62,7 +68,7 @@ function HomePageClient({salaries, filters}: {salaries: MeanSalary[]; filters: F
                 <TableHead
                   className={cn(
                     {underline: filters.sort === "count"},
-                    "w-[110px] cursor-pointer text-right",
+                    "w-[110px] cursor-pointer border-none text-right hover:bg-muted/25",
                   )}
                   onClick={() => handleSort("count")}
                 >
@@ -90,7 +96,7 @@ function HomePageClient({salaries, filters}: {salaries: MeanSalary[]; filters: F
                       : usdOriginalValue;
 
                   return (
-                    <TableRow key={id}>
+                    <TableRow key={id} className="odd:bg-muted/25">
                       <TableCell className="font-medium">{position}</TableCell>
                       <TableCell>{currency}</TableCell>
                       <TableCell>{seniority}</TableCell>

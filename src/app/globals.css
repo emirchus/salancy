@@ -46,11 +46,7 @@
     --sidebar-ring: 217.2 91.2% 59.8%;
 
     --scrollbar-width: 8px;
-    --scrollbar-height: 8px;
     --scrollbar-border-radius: 4px;
-    --scrollbar-track: #F3F4F6;
-    --scrollbar-thumb: #D1D5DB;
-    --scrollbar-thumb-hover: #9CA3AF;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -94,10 +90,6 @@
       --sidebar-accent-foreground: 240 4.8% 95.9%;
       --sidebar-border: 240 3.7% 15.9%;
       --sidebar-ring: 217.2 91.2% 59.8%;
-
-      --scrollbar-track: #1F2937;
-      --scrollbar-thumb: #4B5563;
-      --scrollbar-thumb-hover: #6B7280;
     }
   }
 }
@@ -111,23 +103,25 @@
   }
 
   /* Style scrollbar */
+  /* https://github.com/shadcn-ui/ui/blob/1081536246b44b6664f4c99bc3f1b3614e632841/apps/www/styles/globals.css#L98 */
   ::-webkit-scrollbar {
     width: var(--scrollbar-width);
-    height: var(--scrollbar-height);
   }
   ::-webkit-scrollbar-track {
-    background: var(--scrollbar-track);
+    background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background-color: var(--scrollbar-thumb);
+    background: hsl(var(--border));
     border-radius: var(--scrollbar-border-radius);
   }
-  ::-webkit-scrollbar-thumb:hover {
-    background-color: var(--scrollbar-thumb-hover);
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
   }
 
   /* This is just for development purposes */
-  next-route-announcer, nextjs-portal {
+  next-route-announcer,
+  nextjs-portal {
     display: none;
   }
 }

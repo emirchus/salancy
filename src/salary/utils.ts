@@ -104,8 +104,8 @@ export function filterMeanSalaries(salaries: MeanSalary[], filters: Filters): Me
       return false;
     }
 
-    // Filter salaries with trusted count
-    if (filters.trusted && salary.count < 3) {
+    // Filter salaries with trusted count.
+    if (filters.trusted && salary.count < (filters.trustTo ?? 3)) {
       return false;
     }
 

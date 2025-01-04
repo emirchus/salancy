@@ -34,9 +34,11 @@ const api = {
     },
     mean: {
       list: async (): Promise<MeanSalary[]> => {
-        const rawSalaries = await api.salary.list();
-        const dollarPrice = await indicesApi.usd.price();
-        const inflation = await indicesApi.inflation.index();
+        const [rawSalaries, dollarPrice, inflation] = await Promise.all([
+          api.salary.list(),
+          indicesApi.usd.price(),
+          indicesApi.inflation.index(),
+        ]);
 
         return calculateMeanSalaries(rawSalaries, dollarPrice, inflation);
       },

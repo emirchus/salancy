@@ -19,7 +19,15 @@ const api = {
         .then(
           (res) => res.json() as Promise<Record<string, {name: string; buy: number; sell: number}>>,
         )
-        .then((prices) => prices["oficial"].sell);
+        .then((prices) => prices["oficial"].sell)
+        .catch(() => null);
+
+      if (!price) {
+        return {
+          old: Number(process.env.NEXT_PUBLIC_ORIGINAL_DOLLAR_PRICE),
+          actual: Number(process.env.NEXT_PUBLIC_ORIGINAL_DOLLAR_PRICE),
+        };
+      }
 
       return {
         old: Number(process.env.NEXT_PUBLIC_ORIGINAL_DOLLAR_PRICE),
@@ -42,7 +50,13 @@ const api = {
             "auth-client": process.env.DOLARITO_TOKEN!,
           },
         },
-      ).then((res) => res.json() as Promise<Record<string, number>>);
+      )
+        .then((res) => res.json() as Promise<Record<string, number>>)
+        .catch(() => null);
+
+      if (!inflation) {
+        return 0;
+      }
 
       const startDate = new Date(process.env.NEXT_PUBLIC_POLL_DATE!);
 
